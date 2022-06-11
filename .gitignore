@@ -1,0 +1,4 @@
+.vscode
+
+frontend/app/node_modules
+frontend/app/public/meshdata.geojson
