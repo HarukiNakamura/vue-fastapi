@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import InputEle from '@/components/InputEle.vue'
-import ShowResult from '@/components/ShowResult.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import InputEle from '@/components/InputEle.vue';
+import ShowResult from '@/components/ShowResult.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -16,13 +16,13 @@ const routes = [
     name: 'result',
     component: ShowResult
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;
 
