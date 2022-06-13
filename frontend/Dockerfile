@@ -6,3 +6,5 @@ ENV TZ Asia/Tokyo
 WORKDIR /app
 
 RUN yarn global add @vue/cli @vue/cli-init
+
+CMD yarn serve

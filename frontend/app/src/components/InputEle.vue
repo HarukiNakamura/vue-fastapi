@@ -130,14 +130,14 @@ export default {
 
   methods: {
     addMarker: function(event) {
-      this.markers.push(event.latlng)
+      this.markers.push(event.latlng);
     },
 
     countClick: function() {
       this.counter ++;
       if (this.counter > this.counterLimit){
-        alert("これ以上マーカーを打てません。")
-        this.removeAllMarker()
+        alert("これ以上マーカーを打てません。");
+        this.removeAllMarker();
       }
     },
 
@@ -145,7 +145,7 @@ export default {
       this.markers.splice(index, 1);
       this.counter --;
       if (this.counter === 0){
-        this.border = []
+        this.border = [];
       }
     },
 
@@ -170,14 +170,14 @@ export default {
         let m_lng = 10000;
         let M_lng = 0;
         for (let i=0; i<this.markers.length; i++){
-          m_lat = Math.min(m_lat, this.markers[i].lat)
-          M_lat = Math.max(M_lat, this.markers[i].lat)
-          m_lng = Math.min(m_lng, this.markers[i].lng)
-          M_lng = Math.max(M_lng, this.markers[i].lng)
-          this.border[0] = m_lat
-          this.border[1] = M_lat
-          this.border[2] = m_lng
-          this.border[3] = M_lng
+          m_lat = Math.min(m_lat, this.markers[i].lat);
+          M_lat = Math.max(M_lat, this.markers[i].lat);
+          m_lng = Math.min(m_lng, this.markers[i].lng);
+          M_lng = Math.max(M_lng, this.markers[i].lng);
+          this.border[0] = m_lat;
+          this.border[1] = M_lat;
+          this.border[2] = m_lng;
+          this.border[3] = M_lng;
         }
       } 
     },

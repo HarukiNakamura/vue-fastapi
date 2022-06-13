@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div>
-      <!-- <button @click="runMesh">show mesh</button> -->
+      {{ message }}
       <br>      
     </div>
     <div>
@@ -22,7 +22,7 @@
 import { latLngBounds } from "leaflet";
 import { LMap, LTileLayer, LControlLayers, LGeoJson} from "vue2-leaflet";
 
-// import InputEle from './InputEle'
+import axios from "axios";
 
 export default {
   name: "ShowResult",
@@ -68,6 +68,8 @@ export default {
         style: {weight: 0, color: "#000000", opacity: 0, fillColor: "#3a2f4d", fillOpacity: 1},
         show: false,
       },
+
+      message: '',
     };
   },
 
@@ -87,6 +89,11 @@ export default {
         );
       };
     },
+  },
+
+  mounted () {
+    axios.get('http://localhost:3000/api/result')
+    .then(response => (this.message = response))
   },
 
   methods: {
