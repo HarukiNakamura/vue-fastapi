@@ -3,4 +3,6 @@
 frontend/app/node_modules
 frontend/app/public/meshdata.geojson
 
+backend/app/AMD_Tools3.py
 backend/app/__pycache__
+memo.txt

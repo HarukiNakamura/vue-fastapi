@@ -1,28 +1,21 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import InputEle from '@/components/InputEle.vue';
-import ShowResult from '@/components/ShowResult.vue';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import InputEle from '../views/InputEle.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'InputEle',
     component: InputEle
   },
-  {
-    path: '/result',
-    name: 'result',
-    component: ShowResult
-  }
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
-
+export default router
