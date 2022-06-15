@@ -8,14 +8,13 @@
     <p>Your Choice: {{ metElement }}</p>
     <br>
     <div>
-      <button @click="postMet">run mesh</button>
+      <button @click="postMet" onclick="location.href='/result'">run mesh</button>
     </div>
-    <div>{{ s }}</div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "InputEle",
@@ -23,26 +22,13 @@ export default {
   data() {
     return {
       metElement: '',
-      s: '',
     };
   },
   
   methods: {
     postMet: function() {
-      axios.post('http://localhost:3000/api/input', {
-        metEle: this.metElement
-      })
-      .then((response) => {
-        //this.$store.mesh.data = response.data;
-        this.s = response.data;
-        })
-      .catch((err) => {
-        console.log(err);
-      });
-    },
+      this.$store.dispatch('postMet', this.metElement)
+    }
   },
 };
 </script>
-
-<!-- <style>
-</style> -->

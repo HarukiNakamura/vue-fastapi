@@ -24,7 +24,7 @@ app.add_middleware(
 class Metele(BaseModel):
     metEle: str
 
-@app.post("/api/input")
+@app.post("/api/result")
 def index1(metElement: Metele):
     print(metElement.metEle)
     Tm, tim, lat, lon, name, uni = GetMetData(metElement.metEle, ["2016-04-01", "2016-04-03"], [35.93,36.41,139.84,140.59], namuni=True)

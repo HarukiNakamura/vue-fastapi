@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import InputEle from '../views/InputEle.vue'
+import ShowResult from '../views/ShowResult.vue'
 
 Vue.use(VueRouter)
 
@@ -10,6 +11,12 @@ const routes = [
     name: 'InputEle',
     component: InputEle
   },
+  {
+    path: '/result',
+    name: 'ShowResult',
+    component: ShowResult
+  },
+
 ]
 
 const router = new VueRouter({
