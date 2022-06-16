@@ -4,6 +4,8 @@ import Vuex from 'vuex'
 import axios from "axios"
 import createPersistedState from 'vuex-persistedstate'
 
+import router from '@/router'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,16 +21,21 @@ export default new Vuex.Store({
   mutations: {
     setData: function(state, data) {
       state.mesh.data = data
+      state.mesh.show = true
     },
 
   },
   actions: {
-    postMet: function({commit}, metElement) {
+    postData: function({commit}, inputData) {
       axios.post('http://localhost:3000/api/result', {
-        metEle: metElement
+        inputData: inputData
       })
       .then((response) => {
         commit('setData', response.data)
+        // ここにローディングの処理を入れる。
+        // actionsにrouter.pushを入れるのは、アンチパターンな気もするが、
+        // 現状は外に方法がわからないので、この方法を採用する。
+        router.push('/result')  
       })
       .catch((err) => {
         console.log(err);

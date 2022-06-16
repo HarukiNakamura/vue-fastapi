@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import InputEle from '../views/InputEle.vue'
+import InputData from '../views/InputData.vue'
 import ShowResult from '../views/ShowResult.vue'
 
 Vue.use(VueRouter)
@@ -8,8 +8,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'InputEle',
-    component: InputEle
+    name: 'InputData',
+    component: InputData
   },
   {
     path: '/result',

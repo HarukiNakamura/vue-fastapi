@@ -21,13 +21,17 @@ app.add_middleware(
     allow_headers=['*']
 )
 
-class Metele(BaseModel):
-    metEle: str
-
+class InputData(BaseModel):
+    # InputData.inputData["metElement"] => str
+    # InputData.inputData["date"] => list[str]
+    # InputData.inputData["border"] list[float]
+    inputData: dict
 @app.post("/api/result")
-def index1(metElement: Metele):
-    print(metElement.metEle)
-    Tm, tim, lat, lon, name, uni = GetMetData(metElement.metEle, ["2016-04-01", "2016-04-03"], [35.93,36.41,139.84,140.59], namuni=True)
+def index1(InputData: InputData):
+    metElement: str = InputData.inputData["metElement"]
+    date: list[str] = InputData.inputData["date"]
+    border: list[float] = InputData.inputData["border"]
+    Tm, tim, lat, lon, name, uni = GetMetData(metElement, date, border, namuni=True)
     all_mesh = get_all_mesh(lat, lon)
     j = 0
     data = Tm[j].flatten()
