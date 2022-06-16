@@ -1,28 +1,24 @@
 <template>
   <div id="app">
     <div>
-      {{ message }}
-      <br>      
-    </div>
-    <div>
       <label>meshの有無</label>
       <input id="checkbox" v-model="mesh.show" type="checkbox">
-      <button @click="runMesh">Show Result</button>
       <l-map ref="map" style="height: 400px; width: 600px;" :options="map.options" :center="map.center" :maxBounds="map.maxBounds" :zoom="map.zoom" :minZoom="map.minZoom">
         <l-control-layers position="topright"></l-control-layers>
         <l-tile-layer v-for="tileProvider in tileProviders" :key="tileProvider.name" :name="tileProvider.name" :visible="tileProvider.visible" :url="tileProvider.url" :attribution="tileProvider.attribution" layer-type="base"/>
         <l-geo-json v-if="mesh.show" :geojson="mesh.data" :options="meshOptions" :options-style="mesh.style"></l-geo-json>
       </l-map>
     </div>
-    <button onclick="location.href='/'">入力画面に戻る</button>
+    <RouterLink to="/">入力画面に戻る</RouterLink>
   </div>
 </template>
+
 
 <script>
 import { latLngBounds } from "leaflet";
 import { LMap, LTileLayer, LControlLayers, LGeoJson} from "vue2-leaflet";
-
-import axios from "axios";
+// import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
   name: "ShowResult",
@@ -45,7 +41,6 @@ export default {
         minZoom: 4,
         inertia: false
       },
-
       tileProviders: [
         {
           name: '標準地図',
@@ -62,18 +57,10 @@ export default {
             '&copy; <a target="_blank" href="http://osm.org/copyright">地理院タイル</a>',
         },
       ],
-
-      mesh: {
-        data: null,
-        style: {weight: 0, color: "#000000", opacity: 0, fillColor: "#3a2f4d", fillOpacity: 1},
-        show: false,
-      },
-
-      message: '',
     };
   },
-
   computed: {
+    ...mapState(['mesh']),
     meshOptions() {
       return {
         onEachFeature: this.meshOnEachFeatureFunction
@@ -91,21 +78,6 @@ export default {
     },
   },
 
-  mounted () {
-    axios.get('http://localhost:3000/api/result')
-    .then(response => (this.message = response))
-  },
-
-  methods: {
-    async runMesh() {
-      const response = await fetch('http://localhost/meshdata.geojson');
-      this.mesh.data = await response.json();
-      this.mesh.show = true;
-    },
-  },
 };
+
 </script>
-
-
-<!-- <style>
-</style> -->
