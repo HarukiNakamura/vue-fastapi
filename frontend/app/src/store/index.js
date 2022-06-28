@@ -33,8 +33,8 @@ export default new Vuex.Store({
       .then((response) => {
         commit('setData', response.data)
         // ここにローディングの処理を入れる。
-        // actionsにrouter.pushを入れるのは、アンチパターンな気もするが、
-        // 現状は外に方法がわからないので、この方法を採用する。
+        // actionsにstate関係以外の処理(router.push)を入れるのは、アンチパターンな気もするが、
+        // 現状は他に方法がわからないので、この方法を採用する。
         router.push('/result')  
       })
       .catch((err) => {
@@ -52,4 +52,3 @@ export default new Vuex.Store({
     }
   )]
 })
-

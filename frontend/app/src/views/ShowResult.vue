@@ -19,10 +19,8 @@ import { latLngBounds } from "leaflet";
 import { LMap, LTileLayer, LControlLayers, LGeoJson} from "vue2-leaflet";
 // import axios from "axios";
 import { mapState } from "vuex";
-
 export default {
   name: "ShowResult",
-
   components: { LMap, LTileLayer, LControlLayers, LGeoJson},
   data() {
     return {
@@ -77,7 +75,5 @@ export default {
       };
     },
   },
-
 };
-
 </script>
