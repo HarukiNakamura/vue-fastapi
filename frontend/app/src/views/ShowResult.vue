@@ -9,7 +9,7 @@
         <l-geo-json v-if="mesh.show" :geojson="mesh.data" :options="meshOptions" :options-style="mesh.style"></l-geo-json>
       </l-map>
     </div>
-    <RouterLink to="/">入力画面に戻る</RouterLink>
+    <base-map :pageName="pageName"></base-map>
   </div>
 </template>
 
@@ -19,11 +19,13 @@ import { latLngBounds } from "leaflet";
 import { LMap, LTileLayer, LControlLayers, LGeoJson} from "vue2-leaflet";
 // import axios from "axios";
 import { mapState } from "vuex";
+import BaseMap from '@/components/BaseMap.vue';
 export default {
   name: "ShowResult",
-  components: { LMap, LTileLayer, LControlLayers, LGeoJson},
+  components: { LMap, LTileLayer, LControlLayers, LGeoJson, BaseMap,},
   data() {
     return {
+      pageName: 'showResult',
       
       map: {
         options: {
