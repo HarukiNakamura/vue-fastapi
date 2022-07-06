@@ -1,17 +1,15 @@
-import Vue from 'vue';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
+import vuetify from './plugins/vuetify'
 
 import axios from 'axios';
-
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-Vue.config.productionTip = false
-
+Vue.config.productionTip = false;
 Vue.prototype.$axios = axios;
-
 
 // leafletのアイコンが表示されないので、その対処。
 // https://github.com/vue-leaflet/Vue2Leaflet/issues/96
@@ -25,5 +23,6 @@ L.Icon.Default.mergeOptions({
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
