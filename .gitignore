@@ -2,5 +2,6 @@
 
 frontend/app/node_modules
 frontend/app/public/meshdata.geojson
+frontend/app/public/prefectures.geojson
 
 backend/app/__pycache__
