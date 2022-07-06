@@ -2,9 +2,9 @@ import numpy as np
 import numpy.ma as ma
 from AMD_Tools3 import lalo2mesh
 
-def get_all_mesh(lat: ma.core.MaskedArray, lon: ma.core.MaskedArray):
+def get_all_mesh(lat: ma.core.MaskedArray, lon: ma.core.MaskedArray) -> list:
     all_combination: np.array = np.array(np.meshgrid(lat, lon)).T.reshape(-1, 2)
-    all_mesh: list = [lalo2mesh(*p) for p in all_combination]
+    all_mesh: list[str] = [lalo2mesh(*p) for p in all_combination]
     return all_mesh
 
 def mesh2bound(meshcode: str):

@@ -1,12 +1,12 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import axios from "axios"
-import createPersistedState from 'vuex-persistedstate'
+import axios from "axios";
+import createPersistedState from 'vuex-persistedstate';
 
-import router from '@/router'
+import router from '@/router';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -15,13 +15,17 @@ export default new Vuex.Store({
       style: {weight: 0, color: "#000000", opacity: 0, fillColor: "#3a2f4d", fillOpacity: 1},
       show: false,
     },
+    border: []
   },
   getters: {
   },
   mutations: {
     setData: function(state, data) {
-      state.mesh.data = data
-      state.mesh.show = true
+      state.mesh.data = data;
+      state.mesh.show = true;
+    },
+    setBorder: function(state, data){
+      state.border = data;
     },
 
   },
