@@ -1,0 +1,10 @@
+docker-compose build
+docker-compose up -d
+docker exec -i -t frontend bash
+vue create . => manualを選択
+yarn add axios vue-axios leaflet vue2-leaflet vuex-persistedstate 
+vue add vuetify
+
+
+docker-compose down --volumes
+docker-compose up -d

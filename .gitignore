@@ -1,6 +1,7 @@
 .vscode
 
 frontend/app/node_modules
+
 frontend/app/public/prefectures.geojson
 
 backend/app/AMD_Tools3.py
