@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/result',
     name: 'ShowResult',
-    component: ShowResult
+    component: ShowResult,
+    props: true
   },
 
 ]

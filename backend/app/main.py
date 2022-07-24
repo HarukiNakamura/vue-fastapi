@@ -29,30 +29,42 @@ class InputData(BaseModel):
 
 @app.post("/api/result")
 def index1(InputData: InputData):
+    print(InputData)
     metElement: str = InputData.inputData["metElement"]
     date: list[str] = InputData.inputData["date"]
     border: list[float] = InputData.inputData["border"]
     Tm, tim, lat, lon, name, uni = GetMetData(metElement, date, border, namuni=True)
-    all_mesh:list[str] = get_all_mesh(lat, lon)
+    all_mesh = get_all_mesh(lat, lon)
 
-    json: dict = {}
-    for i in range(len(Tm)):
-        data = Tm[i].flatten()
-        colourstep = cm.linear._colormaps["viridis"].scale(vmin=min(data), vmax=max(data))
-        colorcode = ["#353535" if np.isnan(x) else colourstep(x) for x in data]
-        geojson: dict = {"type": "FeatureCollection", "features": []}
-        for j in range(len(all_mesh)):
-            meshcode: str = all_mesh[j]
-            s, n, w, e = mesh2bound(meshcode)  
-            geojson_dict = {
-            "type":"Feature",
-            "properties": {"meshcode":meshcode, "eledata":str(data[j]), "fillcolor":colorcode[j]},
-            "geometry": {"type": "Polygon","coordinates": [[[w, s],[e, s],[e, n],[w, n],[w, s]]]}
-            }
-            geojson["features"].append(geojson_dict)
-        json[str(i)] = {"time":str(tim[i]).split(" ")[0], "geojson":geojson}
-    return json
+    # data_lim = {
+    #     "TMP_mea":[-20,40],
+    #     "TMP_max":[-20,40],
+    #     "TMP_min":[-20,40],
+    #     "APCP":[],
+    #     "OPR":[0, 1], #binary data
+    #     "SSD":[],
+    #     "GSR":[],
+    #     "DLR":[],
+    #     "RH":[],
+    #     "WIND":[],
+    #     "SD":[],
+    #     "SWE":[],
+    #     "SFW":[]}
 
+    response_json: dict = {}
+    colourstep = cm.linear._colormaps["viridis"].scale(vmin=np.nanmin(Tm), vmax=np.nanmax(Tm))
+    ndays, nlat, nlng = Tm.shape
+    data = np.reshape(Tm, (ndays, nlat*nlng)).T
+    all_latlng = list(map(lambda tuple: [[tuple[0], tuple[2]],[tuple[1], tuple[3]]], (map(mesh2bound, all_mesh))))
+    for i in range(len(all_latlng)):
+        meshcode = all_mesh[i]
+        latlng = all_latlng[i]
+        d = list(data[i])
+        colorcode = ["#353535" if np.isnan(x) else colourstep(x) for x in d]
+        response_json[meshcode] = {"border":latlng, "fillColor":colorcode}
+    # with open("output.json", "w") as f:
+    #     json.dump(response_json, f)
+    return response_json
 
 
 # Dockerfileからuvicorn(FastAPIサーバー）を起動する
